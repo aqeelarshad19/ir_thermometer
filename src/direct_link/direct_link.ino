@@ -59,19 +59,19 @@ void toggle_low_high(int delay) {
 void loop() {
   int tempObj=0;
   int tempAmb=0;
-
+  int tempbit = 0;
   float tempK = 0;
   //  delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
   //delayMicroseconds(180);
   set_output();
   set_pin(LOW);
-  delay(50);
+  delay(200);
   set_pin(HIGH);
   delayMicroseconds(90);
   
   for (int i=0; i <17; i++){
     set_output();
-    toggle_low_high(30);
+    toggle_low_high(10);
     set_input();
     //delayMicroseconds(20);
     tempObj <<= 1;
@@ -80,15 +80,25 @@ void loop() {
     }
 
   //set_output();
-  
+  tempAmb = 0;
+  tempbit = 0;
   for (int i=0; i < 14; i++) {
      set_output();
-     toggle_low_high(30);
+     toggle_low_high(10);
      set_input();
-     //delayMicroseconds(10);
+     delayMicroseconds(10);
+     tempbit = 1 << (13-i);
+     if (read_pin() == 0x01){      
+      //Set the bit to high and take or with the current value 
+      tempAmb = tempAmb | tempbit;
+     }else {
+      
+     }
+     /*delayMicroseconds(10);
      tempAmb <<= 1;
      if (read_pin() == 0x01) tempAmb++;
      //delayMicroseconds(10);
+     */
   }
   set_output(); // Configure DL Pin as output
   set_pin(LOW); // Set DL Port low for min. 200ns
@@ -107,27 +117,42 @@ void loop() {
     tempAmbSum = 0;
     tempObjSum = 0;
     
-    Serial.print((float)(tempObjAvg/290)-273.15);
-    Serial.print("\t");
-    Serial.print((float)(tempAmbAvg/90) - 273.15);
-    Serial.print("\t");
-    Serial.println((((float)tempObjAvg/290)+(float)tempAmbAvg/90)-273.15);
+    //Serial.print((float)(tempObjAvg/290)-273.15);
+    //Serial.print("\t");
+    //Serial.println((float)(tempAmbAvg/90) - 273.15);
+    
+    //Serial.print((float)(tempObjAvg));
+    //Serial.print("\t");
+    //Serial.println((float)(tempAmbAvg));
+    //Serial.print("\t");
+    //Serial.println((((float)tempObjAvg/290)+(float)tempAmbAvg/90)-273.15);
 
   } else {
     tempAmbSum +=tempAmb;
     tempObjSum +=tempObj;
     myCounter++; 
   }
+  /*
+  for (int b = 16; b >= 0; b--)
+  {
+    Serial.print(bitRead(tempObj, b));
+  }
+  Serial.print(" ");
+  for (int b = 13; b >= 0; b--)
+  {
+    Serial.print(bitRead(tempAmb, b));
+  }
+  Serial.print("\t"); */
   //Serial.print("Temp Obj: ");
-  //Serial.print((float)tempObj);
-  //Serial.print("\t");
+  Serial.print((float)tempObj);
+  Serial.print(" ");
   //Serial.println((float)tempObjAvg/100);
   //Serial.print("\t");
     
   //Serial.print("Temp Obj C: ");
   //Serial.print(tempObj/126);
   //Serial.print(" Temp Amb: " );
-  //Serial.println((float)tempAmb);
+  Serial.println((float)tempAmb);
   //Serial.print("\t");
   //Serial.println((float)tempAmbAvg/90);
   //Serial.print(" Temp Amb c: " );
