@@ -45,7 +45,7 @@ TBA
 
 ## Connection to the ESP
 TBA
-## OLED Display 
+
 ## Raw values, Object and Ambient temperature
 <table>
   <tr>
@@ -54,7 +54,9 @@ TBA
     </td>
   </tr>
 </table>
-## LCD replacement with oled LCD
+
+## LCD replacement with OLED SSD1306 Display
+
 <table>
   <tr>
     <td>
@@ -62,6 +64,7 @@ TBA
     </td>
   </tr>
 </table>
+
 ## Links and References and Acknowledgments
 - Ejaad-Nama, a is newsletter. which cover different technology news. Please, subscribe [here](https://ejaadnama.substack.com/)
 - [TPiS 1T 1252B DigiPile Sensor](https://www.excelitas.com/product/tpis-1t-1252b-digipile-sensor) 
