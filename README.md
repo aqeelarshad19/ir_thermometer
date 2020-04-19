@@ -50,7 +50,7 @@ TBA
 <table>
   <tr>
     <td>
-      <img src="images/Graph.png" | width="250">
+      <img src="images/Graph.png" >
     </td>
   </tr>
 </table>
@@ -58,7 +58,7 @@ TBA
 <table>
   <tr>
     <td>
-      <img src="images/complete.jpg" | width="250">
+      <img src="images/complete.jpg">
     </td>
   </tr>
 </table>
